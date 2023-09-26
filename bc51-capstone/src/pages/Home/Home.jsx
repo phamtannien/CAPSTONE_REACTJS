@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { movieService } from '../../services/movie'
 import Carousel from './Carousel';
+import style from "./style.css"
 
 export default function Home() {
   const [movieList, setMovieList] = useState([])
@@ -30,11 +31,16 @@ export default function Home() {
   return (
     <>
      <Carousel/>
-    <div className="py-5">
+     
+     <div className='project'>
+      <div className="overlay"></div>
+      <div className=" py-5">
   <div className="row mt-3 mx-auto w-75">
     {renderMovieList()}
   </div>
 </div>
+     </div>
+   
     </>
    
 

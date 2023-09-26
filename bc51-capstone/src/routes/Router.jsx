@@ -3,6 +3,7 @@ import { useRoutes } from 'react-router-dom'
 import HomeLayout from '../layouts/HomeLayout/HomeLayout'
 import Home from '../pages/Home/Home'
 import MovieDetail from '../pages/MovieDetail/MovieDetail'
+import Login from '../pages/Login/Login'
 
 export default function Router() {
    const routing = useRoutes([
@@ -17,7 +18,11 @@ export default function Router() {
             {
                 path: "/movie-detail",
                 element: <MovieDetail/>,
-            }
+            },
+            {
+                path: "/login",
+                element: <Login/>,
+            },
         ]
        }
     ])
