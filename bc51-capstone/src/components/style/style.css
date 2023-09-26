@@ -1,6 +1,112 @@
-.footer{
-    background-color: yellow;
+
+header{
+    position: absolute;
+    z-index: 1;
+    left: 50%;
+    transform:translateX(-50%)
 }
-.navbar{
-    background-color: blueviolet;
+.header__content ul.navbar-nav li a {
+    font-size: 24px;
+    color: white!important;
 }
+
+.header__content .navbar-brand i {
+    color: green;
+}
+.header__content .navbar-brand span {
+    font-size: 2rem;
+}
+.header__content ul .navbar-brand li{
+    margin: 0 10px;
+
+}
+.header__content ul.navbar-nav li.active a{
+    color:green !important;
+    
+
+}
+.header__content ul.navbar-nav li::after{
+    content: "";
+    display: block;
+    width: 0;
+    height: 2px;
+    background-color: green;
+    transition: all 0.5s
+    
+}
+.header__content ul.navbar-nav li.active::after,
+.header__content ul.navbar-nav li:hover::after{
+    width: 90%;
+}
+.header__content ul.navbar-nav li:hover a{
+    color: green;
+}
+
+footer{
+    background-image: url(https://www.pixel4k.com/wp-content/uploads/2019/03/marvel-spiderman-game-4k_1553074988.jpg.webp);
+}
+
+
+
+
+
+
+/* .tablefooder {
+    display: block;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .footer {
+    background-color: #1d365e;
+  }
+  .footer .contact {
+    display: flex;
+    font-size: 1.1rem;
+    color: #dddada !important;
+  }
+  .footer .contact .contact-item h3 {
+    color: #f9d412;
+  }
+  .footer .contact .contact-item ul li {
+    list-style: none;
+  }
+  .footer .contact .contact-item ul li a {
+    text-decoration: none;
+    font-size: 1.1rem;
+    color: #dddada !important;
+  }
+  .footer .contact .contact-item .icon {
+    display: flex;
+  }
+  .footer .contact .contact-input {
+    margin: 10px;
+  }
+  .footer .contact .icon li a {
+    display: block !important;
+    width: 30px;
+    height: 30px;
+    background-color: #f9d412;
+    border-radius: 50%;
+    text-align: center;
+    margin-right: 10px;
+    color: #f5f9fe;
+  } */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
