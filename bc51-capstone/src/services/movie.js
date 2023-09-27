@@ -9,8 +9,12 @@ class MovieService {
      })
         
     }
-    fetchMovieDetailApi(){
-
+    fetchMovieDetailApi(movieId){
+        return request({
+            url: `QuanLyPhim/LayThongTinPhim?MaPhim=${movieId}`,
+            method: "GET",
+           
+         })
     }
 }
 export const movieService = new MovieService()
