@@ -16,13 +16,15 @@ const renderContent = ()=>{
     return( 
     <div className='ml-login'>
      <button 
-      className="btn btn-outline-info my-2 my-sm-0 mr-2" 
-      type="sumit">
+      className="btn btn-outline-light my-2 my-sm-0 mr-2 text-white" 
+      type="sumit"
+      onClick={()=>navigate("/register")}
+      >
         Register
       </button>
       <button 
       onClick={()=>navigate("/login")} 
-      className="btn btn-outline-success my-2 my-sm-0">
+      className="btn btn-outline-light my-2 my-sm-0 text-white">
         Login
       </button>
     
@@ -68,7 +70,7 @@ const handleLogout = ()=>{
       <div className="collapse navbar-collapse" id="collapsibleNavbar">
         <ul className="navbar-nav ml-auto">
           <li className="nav-item active">
-            <a className="nav-link" href="#">Home</a>
+            <NavLink className="nav-link" to="/">Home</NavLink>
           </li>
           <li className="nav-item">
             <a className="nav-link" href="#">About</a>
