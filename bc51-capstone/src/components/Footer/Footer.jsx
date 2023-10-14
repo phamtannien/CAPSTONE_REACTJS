@@ -76,7 +76,7 @@ export default function Footer() {
         <div className="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
           
           <h6 className="text-uppercase fw-bold mb-4">Contact</h6>
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d108524.49435038719!2d106.62508258584518!3d10.868418201767064!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317528b8584047ab%3A0x993a37014e2c120!2sChung%20c%C6%B0%201050!5e0!3m2!1svi!2s!4v1695742751700!5m2!1svi!2s" width="200" height="100"  allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d108524.49435038719!2d106.62508258584518!3d10.868418201767064!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317528b8584047ab%3A0x993a37014e2c120!2sChung%20c%C6%B0%201050!5e0!3m2!1svi!2s!4v1695742751700!5m2!1svi!2s" width="200" height="100"  allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
           <p>
             <i className="fas fa-envelope me-3" />
             cyberphone@mail.com
