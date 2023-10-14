@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "baseUrl": "./src",
+         "jsx": "react-jsx",
+        "paths": {
+            "services/*":["./src/services/*"],
+            "enums/*":["./src/enums/*"],
+            "hooks/*":["./src/hooks/*"]
+            
+        }
+    }
+}

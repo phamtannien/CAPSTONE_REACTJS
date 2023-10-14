@@ -15,5 +15,6 @@ registerApi(data){
       data: data,
      })
 }
+
 }
 export const userService = new UserService()

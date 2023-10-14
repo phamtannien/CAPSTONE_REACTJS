@@ -1,8 +1,8 @@
 import React from 'react'
 import style from "../style/style.css"
-import { NavLink, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { setUserInfoAction } from '../../store/actions/userAction'
+import { NavLink, useNavigate } from 'react-router-dom';
 
 export default function Header() {
   const ditpatch = useDispatch();
@@ -17,7 +17,7 @@ const renderContent = ()=>{
     <div className='ml-login'>
      <button 
       className="btn btn-outline-light my-2 my-sm-0 mr-2 text-white" 
-      type="sumit"
+      //type="sumit"
       onClick={()=>navigate("/register")}
       >
         Register
@@ -39,7 +39,7 @@ const renderContent = ()=>{
 
       <button 
       onClick={handleLogout} 
-      className=" ml-3 btn btn-warning">
+      className="btn btn-outline-light my-2 my-sm-0 text-white">
         LOGOUT
         </button>
       </div>
@@ -58,10 +58,9 @@ const handleLogout = ()=>{
   <div className="header__content">
     <nav className="navbar navbar-expand-md  navbar-dark">
       {/* Brand */}
-      <a className="navbar-brand" href="#">
-        <i className="fa-thin fa-dice-d20" />
+      <NavLink className="navbar-brand" to="/">
         <h1>Cyber Cinema</h1>
-      </a>
+      </NavLink>
       {/* Toggler/collapsibe Button */}
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
         <span className="navbar-toggler-icon" />
@@ -82,7 +81,7 @@ const handleLogout = ()=>{
             <a className="nav-link" href="#">Contact</a>
           </li>
         </ul>
-        <div classname="ml-auto">
+        <div  style={{marginRight:"10"}}>
           {renderContent()}
         </div>
       </div>
@@ -91,25 +90,6 @@ const handleLogout = ()=>{
 </header>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
   )
 }
 
@@ -117,33 +97,3 @@ const handleLogout = ()=>{
 
 
 
-//     <header>
-//       <nav className="navbar navbar-expand-lg navbar-light ">
-//   <a className="navbar-brand" href="#">
-//     <h2 className="text-white" >CyberSoft Movie</h2>
-//   </a>
-//   <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-//     <span className="navbar-toggler-icon" />
-//   </button>
-//   <div className="collapse navbar-collapse" id="navbarNavDropdown">
-//     <ul className="navbar-nav">
-//       <li className="nav-item active">
-//         <NavLink className="nav-link" to="/">Home <span className="sr-only">(current)</span></NavLink>
-//       </li>
-//       <li className="nav-item">
-//         <NavLink className="nav-link" href="#">Show Time</NavLink>
-//       </li>
-//       <li className="nav-item">
-//         <NavLink className="nav-link" href="#">Service</NavLink>
-//       </li>
-//       <li className="nav-item">
-//         <NavLink className="nav-link" href="#">Connect</NavLink>
-//       </li>
-     
-//     </ul>
-//     <div className="ml-auto">
-//      {renderContent()}
-//     </div>
-//   </div>
-// </nav>
-//     </header>

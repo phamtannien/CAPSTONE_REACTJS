@@ -1,19 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
-import { movieService } from '../../../../services/movie';
-import moment from 'moment';
+
 import { formatDate } from '../../../../utils/date';
+import useMovieDetail from '../../../../hooks/useMovieDetail';
 
 export default function Detail() {
-    const [detail, setDetail] = useState({})
-    const params = useParams();
-    useEffect(()=>{
-        fetchMovieDetail()
-    },[])
-    const fetchMovieDetail = async ()=>{
-      const result = await  movieService.fetchMovieDetailApi(params.movieId)
-      setDetail(result.data.content)
-    }
+ const detail = useMovieDetail();
     
   return (
     <div className="row">

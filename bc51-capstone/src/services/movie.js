@@ -1,9 +1,17 @@
+import { GROUPID } from "../constants/api"
 import { request } from "../configs/api"
 
 class MovieService {
-    fetchMovieListApi(){
+    fetchMovieListApi(tenPhim=''){
+        if(tenPhim.trim() != ''){
+            return request({
+                url: `/QuanLyPhim/LayDanhSachPhim?maNhom=${GROUPID}&tenPhim=${tenPhim}`,
+                method: "GET",
+               
+             })
+        }
      return request({
-        url: "/QuanLyPhim/LayDanhSachPhim?maNhom=GP03",
+        url: "/QuanLyPhim/LayDanhSachPhim?maNhom=GP01",
         method: "GET",
        
      })
