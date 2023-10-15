@@ -7,9 +7,9 @@ import {
   DeleteOutlined,
   CalendarOutlined,
 } from "@ant-design/icons";
-import { adminService } from "../../../services/admin";
-import { LoadingContext } from "../../../contexts/LoadingContext/LoadingContext";
 import { NavLink, useNavigate } from "react-router-dom";
+import { LoadingContext } from "contexts/LoadingContext/LoadingContext";
+import { adminService } from "services/admin";
 const { Search } = Input;
 export default function UserManagement() {
   const navigate = useNavigate();
