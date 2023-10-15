@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { cinemaService } from '../../../../services/cinema';
-import moment from 'moment'
 import { formatDate } from '../../../../utils/date';
 
 export default function Showtimes() {
@@ -9,6 +8,7 @@ export default function Showtimes() {
    const [data, setData] = useState([])
     useEffect(()=>{
         fetchShowtimes()
+        return  () => {}
     },[]);
     const fetchShowtimes = async ()=>{
        const result = await cinemaService.fetchShowTimesApi(params.movieId)
@@ -58,11 +58,11 @@ export default function Showtimes() {
               <div className="row">
                 {element.lichChieuPhim.map((element)=>{
                     return (
-                        <div key={element.maRap} className="col-3">
-                  <a className="text-white" href="3">
-                     {formatDate(element.ngayChieuGioChieu)}
-                  </a>
-                </div>
+                      <div key={element.maRap} className="col-3">
+                      <Link to={`/booking/${element.maLichChieu}`}>
+                        {formatDate(element.ngayChieuGioChieu)}
+                      </Link>
+                    </div>
                     )
                 })}
                 
