@@ -16,8 +16,8 @@ import Showtime from '../pages/Admin/ShowTime/Showtime'
 import AddNew from '../pages/Admin/Films/AddNew/AddNew'
 import Edit from '../pages/Admin/Films/Edit/Edit'
 import UserManagement from '../pages/Admin/Dashboard/UserManagement'
-import AddUser from '../pages/Admin/Dashboard/AddUser/AddUser'
 import EditUser from '../pages/Admin/Dashboard/EditUser/EditUser'
+import AddUser from 'pages/Admin/Dashboard/AddUser/AddUser'
 
 export default function Router() {
    const routing = useRoutes([

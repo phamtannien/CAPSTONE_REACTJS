@@ -1,169 +1,142 @@
-import React, { Fragment, useContext, useEffect, useState } from "react";
-import { Button, Calendar, Table, notification } from "antd";
-import { Input, Space } from "antd";
+import React, { useEffect, useState } from "react";
+
 import {
-  AudioOutlined,
-  EditOutlined,
-  DeleteOutlined,
-  CalendarOutlined,
-} from "@ant-design/icons";
-import { NavLink, useNavigate } from "react-router-dom";
-import { LoadingContext } from "contexts/LoadingContext/LoadingContext";
-import { adminService } from "services/admin";
-const { Search } = Input;
-export default function UserManagement() {
+  Button,
+  Cascader,
+  DatePicker,
+  Form,
+  Input,
+  InputNumber,
+  Radio,
+  Select,
+  Switch,
+  TreeSelect,
+  notification,
+  
+} from "antd";
+import { useFormik } from "formik";
+import { min, set, values } from "lodash";
+import moment from "moment";
+import { useDispatch } from "react-redux";
+import { adminService } from "../../../../services/admin";
+import { useNavigate } from "react-router-dom";
+
+
+
+
+const AddUser = () => {
   const navigate = useNavigate();
-  const [userList, setUserList] = useState([]);
-  const [loading, setLoading] = useContext(LoadingContext);
-  useEffect(() => {
-    fetchUserList();
-  }, []);
-  const fetchUserList = async () => {
-    setLoading({
-      isLoading: true,
-    });
+     const [state, setState] = useState([]);
+    useEffect(()=>{
+      fetchListUserType()
+    },[])
+    const fetchListUserType = async ()=>{
+      try {
+        let result = await adminService.layDanhSachLoaiNguoiDungApi();
+       
+       setState(result.data.content)
 
-    const result = await adminService.layDanhSachNguoiDungApi();
-    setUserList(result.data.content);
+        
+    } catch (error) {
+        
+    }
+    }
 
-    setLoading({
-      isLoading: false,
-    });
-  };
-
-  const columns = [
-    {
-      title: "STT",
-      dataIndex: "maPhim",
-      render: (text, film, idx) => {
-        return <Fragment>{idx + 1}</Fragment>;
-      },
-      width: 50,
+  const [componentSize, setComponentSize] = useState("default");
+const formik = useFormik({
+    initialValues: {
+        taiKhoan: "",
+        hoTen: "",
+        matKhau: "",
+        email: "",
+        soDt: "",
+        maLoaiNguoiDung: "",
+        maNhom: "GP01"
     },
-    {
-      title: "Tài khoản",
-      dataIndex: "taiKhoan",
-      width: 150,
-      defaultSortOrder: "descend",
-      sorter: (a, b) => a.taiKhoan - b.taiKhoan,
-    },
-    {
-      title: "Họ Tên",
-      dataIndex: "hoTen",
-      sorter: (a, b) => {
-        let hoTenA = a.hoTen.toLowerCase().trim();
-        let hoTenB = b.hoTen.toLowerCase().trim();
-        if (hoTenA > hoTenB) {
-          return 1;
+    onSubmit: async  (values) => {
+               try {
+          const result = await adminService.themNguoiDungApi(values);
+          
+          notification.success({
+            message: "Thêm người dùng thành công",
+            placement: "bottomRight",
+          });
+          navigate("/admin")
+        } catch (error) {
+          notification.error({
+            message: "Thêm người dùng thất bại",
+            placement: "bottomRight",
+          });
         }
-        return -1;
-      },
-      width: 200,
-      sortDirections: ["descend", "ascend"],
-    },
-    {
-      title: " Email",
-      dataIndex: "email",
-    },
-    {
-      title: " Số  điện thoại",
-      dataIndex: "soDT",
-    },
-    {
-      title: " Hành động ",
-      dataIndex: "taiKhoan",
+     }
+})
 
-      render: (text, user) => {
-        return (
-          <Fragment>
-            <NavLink
-              key={1}
-              className="mr-2 text-2xl"
-              to={`/admin/user/edituser/${user.taiKhoan}`}
-            >
-              {" "}
-              <EditOutlined style={{ color: "blue" }} />{" "}
-            </NavLink>
-            <span
-              key={2}
-              className="mr-2 text-2xl"
-              onClick={async () => {
-                const confirm = window.confirm(
-                  "Bạn có chắc muốn xóa tài khoản " + user.taiKhoan + "?"
-                );
+const handleChangLoaiNguoiDung = (values)=>{
+   formik.setFieldValue("maLoaiNguoiDung", values.toString())
+}
+const convertSelectLND = ()=>{
+    return state?.map((lnd, idx)=>{
+        return {label:lnd.tenLoai , value:lnd.maLoaiNguoiDung}
+    })
+}
 
-                if (!confirm) return;
-                try {
-                  await adminService.xoaNguoiDungApi(user.taiKhoan);
-                  notification.success({
-                    message: "Xóa người dùng thành công",
-                    placement: "bottomRight",
-                  });
-
-                  const result = await adminService.layDanhSachNguoiDungApi();
-                  setUserList(result.data.content);
-                } catch (error) {
-                  notification.error({
-                    message: "Xóa người dùng thất bại",
-                    placement: "bottomRight",
-                  });
-                }
-              }}
-            >
-              {" "}
-              <DeleteOutlined
-                style={{ color: "red", cursor: "pointer" }}
-              />{" "}
-            </span>
-            <NavLink
-              key={3}
-              className="mr-2 text-2xl"
-              to={`/admin/user/adduser`}
-            >
-              {" "}
-              <CalendarOutlined style={{ color: "blue" }} />{" "}
-            </NavLink>
-          </Fragment>
-        );
-      },
-    },
-  ];
-  const onChange = (pagination, filters, sorter, extra) => {
-  };
-  const suffix = (
-    <AudioOutlined
-      style={{
-        fontSize: 16,
-        color: "#1677ff",
-      }}
-    />
-  );
-
-  const onSearch = async (value) => {
-    //call api
-    const result = await adminService.layDanhSachNguoiDungApi(value);
-    const search = await adminService.layDanhSachNguoiDungApi();
-    setUserList(result.data.content);
+  const onFormLayoutChange = ({ size }) => {
+    setComponentSize(size);
   };
   return (
-    <div className="container">
-      <h3> Quản lí người dùng</h3>
-      <Button onClick={() => navigate("/admin/user/adduser")}>
-        Thêm người dùng
-      </Button>
-      <Search
-        className="mb-5"
-        placeholder="tìm kiếm theo họ tên"
-        size="large"
-        onSearch={onSearch}
-      />
+    <>
+      <Form
+      onSubmitCapture={formik.handleSubmit}
+        labelCol={{
+          span: 4,
+        }}
+        wrapperCol={{
+          span: 14,
+        }}
+        layout="horizontal"
+        initialValues={{
+          size: componentSize,
+        }}
+        onValuesChange={onFormLayoutChange}
+        size={componentSize}
+        style={{
+          maxWidth: 600,
+        }}
+      >
+        <h3>Thêm người dùng</h3>
+        <Form.Item label="Form Size" name="size">
+          <Radio.Group>
+            <Radio.Button value="small">Small</Radio.Button>
+            <Radio.Button value="default">Default</Radio.Button>
+            <Radio.Button value="large">Large</Radio.Button>
+          </Radio.Group>
+        </Form.Item>
+        <Form.Item label="Tài khoản">
+          <Input name="taiKhoan" onChange={formik.handleChange} />
+        </Form.Item>
+        <Form.Item label="Họ tên">
+          <Input name="hoTen" onChange={formik.handleChange} />
+        </Form.Item>
+        <Form.Item label="Mật khẩu">
+          <Input name="matKhau" onChange={formik.handleChange} />
+        </Form.Item>
+        <Form.Item label="Email">
+          <Input name="email" onChange={formik.handleChange} />
+        </Form.Item>
+        <Form.Item label="Số điện thoại">
+          <Input name="soDt" onChange={formik.handleChange} />
+        </Form.Item>
+      
+        <Form.Item label="Loại người dùng">
+        <Cascader options={convertSelectLND()} onChange={handleChangLoaiNguoiDung} placeholder="Loại người dùng" />
+        </Form.Item>
+       
 
-      <Table
-        columns={columns}
-        dataSource={userList}
-        onChange={onChange}
-        rowKey={"maPhim"}
-      />
-    </div>
+        <Form.Item label="Tác vụ">
+            <button type="submit" className="btn btn-primary text-white p-2" >Thêm</button>
+        </Form.Item>
+      </Form>
+    </>
   );
-}
+};
+export default AddUser;
